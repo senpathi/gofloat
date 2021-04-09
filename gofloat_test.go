@@ -3,52 +3,110 @@ package domain
 import (
 	"fmt"
 	"math"
+	"math/rand"
 	"testing"
 )
 
-func TestCurrency(t *testing.T) {
-	t.Run(`TestCurrencyAdd`, func(t *testing.T) {
-		f1 := 1.3725
-		f2 := 2.4725
-		x := ToCurrency(f1)
-		y := ToCurrency(f2)
-		x = x.Add(y)
-		if x.Float64() != math.Round((f1+f2)*float64(floatLength))/float64(floatLength) {
-			t.Error(fmt.Sprintf(`expected %f, received %f`, f1+f2, x.Float64()))
+func TestFloat(t *testing.T) {
+	t.Run(`TestToFloat`, func(t *testing.T) {
+		testTable := setupTestTable(`NONE`)
+		for _, tt := range testTable {
+			x := ToFloat(tt.input1, tt.precision1)
+			if x.Float64() != tt.out {
+				t.Error(fmt.Sprintf(`expected %f, received %f`, tt.out, x.Float64()))
+			}
 		}
 	})
 
-	t.Run(`TestCurrencySub`, func(t *testing.T) {
-		f1 := -1.3725
-		f2 := 2.47255
-		x := ToCurrency(f1)
-		y := ToCurrency(f2)
-		x = x.Sub(y)
-		expected := math.Round((f1-f2)*float64(floatLength)) / float64(floatLength)
-		if x.Float64() != expected {
-			t.Error(fmt.Sprintf(`expected %f, received %f`, expected, x.Float64()))
+	t.Run(`TestFloatAdd`, func(t *testing.T) {
+		testTable := setupTestTable(`ADD`)
+		for _, tt := range testTable {
+			x := ToFloat(tt.input1, tt.precision1)
+			y := ToFloat(tt.input2, tt.precision2)
+			x = x.Add(y)
+			if x.Float64() != tt.out {
+				t.Error(fmt.Sprintf(`expected %f + %f = %f, but received %f with precisions %d and %d`,
+					tt.input1, tt.input2, tt.out, x.Float64(), tt.precision1, tt.precision2))
+			}
 		}
 	})
 
-	t.Run(`TestCurrencyMultiply`, func(t *testing.T) {
-		f1 := 1.3725
-		f2 := 2.4725
-		x := ToCurrency(f1)
-		y := ToCurrency(f2)
-		x = x.Multiply(y)
-		if x.Float64() != math.Round(f1*f2*float64(floatLength))/float64(floatLength) {
-			t.Error(fmt.Sprintf(`expected %f, received %f`, f1*f2, x.Float64()))
+	t.Run(`TestFloatSub`, func(t *testing.T) {
+		testTable := setupTestTable(`SUB`)
+		for _, tt := range testTable {
+			x := ToFloat(tt.input1, tt.precision1)
+			y := ToFloat(tt.input2, tt.precision2)
+			x = x.Sub(y)
+			if x.Float64() != tt.out {
+				t.Error(fmt.Sprintf(`expected %f - %f = %f, but received %f with precision %d and %d`,
+					tt.input1, tt.input2, tt.out, x.Float64(), tt.precision1, tt.precision2))
+			}
 		}
 	})
 
-	t.Run(`TestCurrencyDivide`, func(t *testing.T) {
-		f1 := 1.3725
-		f2 := 2.4725
-		x := ToCurrency(f1)
-		y := ToCurrency(f2)
-		x = x.Divide(y)
-		if x.Float64() != math.Round(f1/f2*float64(floatLength))/float64(floatLength) {
-			t.Error(fmt.Sprintf(`expected %f, received %f`, f1/f2, x.Float64()))
+	t.Run(`TestFloatMultiply`, func(t *testing.T) {
+		testTable := setupTestTable(`MUL`)
+		for _, tt := range testTable {
+			x := ToFloat(tt.input1, tt.precision1)
+			y := ToFloat(tt.input2, tt.precision2)
+			x = x.Multiply(y)
+			if x.Float64() != tt.out {
+				t.Error(fmt.Sprintf(`expected %f * %f = %f, but received %f with precision %d and %d`,
+					tt.input1, tt.input2, tt.out, x.Float64(), tt.precision1, tt.precision2))
+			}
 		}
 	})
+
+	t.Run(`TestFloatDivide`, func(t *testing.T) {
+		testTable := setupTestTable(`DEV`)
+		for _, tt := range testTable {
+			x := ToFloat(tt.input1, tt.precision1)
+			y := ToFloat(tt.input2, tt.precision2)
+			x = x.Divide(y)
+			if x.Float64() != tt.out {
+				t.Error(fmt.Sprintf(`expected %f / %f = %f, but received %f with precision %d and %d`,
+					tt.input1, tt.input2, tt.out, x.Float64(), tt.precision1, tt.precision2))
+			}
+		}
+	})
+}
+
+type TestInput struct {
+	input1     float64
+	input2     float64
+	precision1 int
+	precision2 int
+	out        float64
+}
+
+func setupTestTable(operator string) []TestInput {
+	inputs := make([]TestInput, 1000)
+	for i := range inputs {
+		inputs[i] = TestInput{
+			input1:     rand.Float64() * 1e5,
+			input2:     rand.Float64() * 1e5,
+			precision1: rand.Intn(9),
+			precision2: rand.Intn(9),
+		}
+
+		length1 := math.Trunc(math.Pow(10, float64(inputs[i].precision1)))
+		max := getMaxPrecision(inputs[i].precision1, inputs[i].precision2)
+		lengthMax := math.Trunc(math.Pow(10, float64(max)))
+		rounded1 := ToFloat(inputs[i].input1, inputs[i].precision1).Float64()
+		rounded2 := ToFloat(inputs[i].input2, inputs[i].precision2).Float64()
+
+		switch operator {
+		case `NONE`:
+			inputs[i].out = math.Round(inputs[i].input1*length1) / length1
+		case `ADD`:
+			inputs[i].out = math.Round((rounded1+rounded2)*lengthMax) / lengthMax
+		case `SUB`:
+			inputs[i].out = math.Round((rounded1-rounded2)*lengthMax) / lengthMax
+		case `MUL`:
+			inputs[i].out = math.Round((rounded1*rounded2)*lengthMax) / lengthMax
+		case `DEV`:
+			inputs[i].out = math.Round((rounded1/rounded2)*lengthMax) / lengthMax
+		}
+	}
+	return inputs
 }

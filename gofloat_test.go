@@ -69,6 +69,17 @@ func TestFloat(t *testing.T) {
 			}
 		}
 	})
+
+	t.Run(`TestFloatDivideByZero`, func(t *testing.T) {
+		x := ToFloat(100.1234, 2)
+		y := ToFloat(0, 0)
+		x = x.Divide(y)
+		if x.Float64() != 0 {
+			t.Error(fmt.Sprintf(`expected %f / %f = %f, but received %f`,
+				100.1234, 0.0, 0.0, x.Float64()))
+		}
+	})
+
 }
 
 type TestInput struct {
@@ -81,10 +92,11 @@ type TestInput struct {
 
 func setupTestTable(operator string) []TestInput {
 	inputs := make([]TestInput, 1000)
+
 	for i := range inputs {
 		inputs[i] = TestInput{
-			input1:     rand.Float64() * 1e5,
-			input2:     rand.Float64() * 1e5,
+			input1:     rand.Float64() * 1e5 * math.Pow(-1, float64(i/250)),
+			input2:     rand.Float64() * 1e5 * math.Pow(-1, float64(i/500)),
 			precision1: rand.Intn(9),
 			precision2: rand.Intn(9),
 		}

@@ -1,4 +1,12 @@
 # gofloat
+
+[![Godoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://pkg.go.dev/github.com/senpathi/gofloat)
+[![build](https://github.com/senpathi/gofloat/workflows/build/badge.svg)](https://github.com/senpathi/gofloat/actions)
+[![Coverage](https://codecov.io/gh/senpathi/gofloat/branch/master/graph/badge.svg)](https://codecov.io/gh/senpathi/gofloat)
+[![Releases](https://img.shields.io/github/release/senpathi/gofloat/all.svg?style=flat-square)](https://github.com/senpathi/gofloat/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/senpathi/gofloat)](https://goreportcard.com/report/github.com/senpathi/gofloat)
+[![LICENSE](https://img.shields.io/github/license/senpathi/gofloat.svg?style=flat-square)](https://github.com/senpathi/gofloat/blob/master/LICENSE)
+
 Gofloat is a library that does floating-point number calculations with fixed precision.
 
 ## Description
@@ -49,7 +57,7 @@ func main() {
 
 ## Usage
 Documentation is available via
-[![GoDoc](https://godoc.org/github.com/senpathi/gofloat?status.svg)](https://pkg.go.dev/github.com/senpathi/gofloat).
+[![GoDoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://pkg.go.dev/github.com/senpathi/gofloat).
 ````go
 package main
 

@@ -82,6 +82,34 @@ func TestFloat(t *testing.T) {
 
 }
 
+func BenchmarkFloat(b *testing.B) {
+	b.Run(`Bench_ToFloat`, func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			ToFloat(float64(i/33), 5)
+		}
+	})
+	b.Run(`Bench_Float_Add`, func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			ToFloat(float64(i/33), 5).Add(ToFloat(float64(i/66), 5))
+		}
+	})
+	b.Run(`Bench_Float_Sub`, func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			ToFloat(float64(i/33), 5).Sub(ToFloat(float64(i/66), 5))
+		}
+	})
+	b.Run(`Bench_Float_Multiply`, func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			ToFloat(float64(i/33), 5).Multiply(ToFloat(float64(i/66), 5))
+		}
+	})
+	b.Run(`Bench_Float_Divide`, func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			ToFloat(float64(i/33), 5).Divide(ToFloat(float64(i/66), 5))
+		}
+	})
+}
+
 type TestInput struct {
 	input1     float64
 	input2     float64

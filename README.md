@@ -2,6 +2,48 @@
 Gofloat is a library that does floating-point number calculations with fixed precision.
 
 ## Description
+### why goflat
+* without gofloat
+```go
+package main
+
+import "fmt"
+
+func main() {
+	f1 := 0.1
+	f2 := 0.2
+	if f1+f2 == 0.3 {
+		fmt.Println(`0.1 + 0.2 = `, f1+f2)
+	} else {
+		fmt.Println(`0.1 + 0.2 != `, f1+f2)
+	}
+	//Output: 0.1 + 0.2 != 0.30000000000000004
+}
+```
+
+* with gofloat
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/senpathi/gofloat"
+)
+
+func main() {
+	f1 := gofloat.ToFloat(0.1, 1)
+	f2 := gofloat.ToFloat(0.2, 1)
+	if f1.Add(f2).Float64() == 0.3 {
+		fmt.Println(`0.1 + 0.2 = `, f1.Add(f2).Float64())
+	} else {
+		fmt.Println(`0.1 + 0.2 != `, f1.Add(f2).Float64())
+	}
+	//Output: 0.1 + 0.2 = 0.3
+}
+
+```
+
+* gofloat make sure to do calculations on floating-point numbers with fix number of precision digits
 * Converts floating-point numbers to gofloat type with sent precision length
 * Do Calculations in converted type and it can be converted back to floating-point
 

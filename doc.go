@@ -1,6 +1,6 @@
 // Gofloat is a library that does floating-point number calculations with fixed precision.
 //
-// Below examples show why gofloat library is useful when doung floating-point calculations.
+// Below examples show why Gofloat library is useful when doing floating-point calculations.
 //
 // Without Gofloat
 //
@@ -39,9 +39,9 @@
 //  //Output: 0.1 + 0.2 = 0.3
 //  }
 //
-// gofloat make sure to do calculations on floating-point numbers with fix number of precision digits
-// it converts floating-point numbers to gofloat type with sent precision length and
-// do calculations in converted type and it can be converted back to floating-point.
+// Gofloat make sure to do calculations on floating-point numbers with fix number of precision digits.
+// it converts floating-point numbers into gofloat's `Float` type with sent precision length and
+// do calculations in gofloat's `Float` type and it can be converted back into floating-point.
 //
 // Below example shows how to use the library in applications.
 //

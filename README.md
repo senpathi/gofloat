@@ -48,6 +48,8 @@ func main() {
 * Do Calculations in gofloat's `Float` and then can be converted back into floating-point
 
 ## Usage
+Documentation is available via
+[![GoDoc](https://godoc.org/github.com/senpathi/gofloat?status.svg)](https://pkg.go.dev/github.com/senpathi/gofloat).
 ````go
 package main
 

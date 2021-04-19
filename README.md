@@ -41,6 +41,6 @@ func main() {
 ````
 Please see the example programs in the examples directory for reference.
 
-##Limitations
+## Limitations
 * if the calculated result is larger than maximum float64 value, result will be incorrect.
 

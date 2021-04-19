@@ -43,9 +43,9 @@ func main() {
 
 ```
 
-* gofloat make sure to do calculations on floating-point numbers with fix number of precision digits
-* Converts floating-point numbers to gofloat type with sent precision length
-* Do Calculations in converted type and it can be converted back to floating-point
+* gofloat makes sure to do calculations on floating-point numbers with fix number of precision digits
+* Converts floating-point numbers into gofloat's `Float` type with sent precision length
+* Do Calculations in gofloat's `Float` and then can be converted back into floating-point
 
 ## Usage
 ````go

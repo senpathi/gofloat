@@ -34,4 +34,4 @@ jobs:
       - name: Code Cov
         uses: codecov/codecov-action@v1.4.0
         with:
-          token: ${{ secrets.codcov-token }}
+          token: ${{ secrets.codcovToken }}

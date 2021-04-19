@@ -80,5 +80,6 @@
 //
 //
 // Limitations.
+//
 // If the calculated result is larger than maximum float64 value, result will be incorrect.
 package gofloat

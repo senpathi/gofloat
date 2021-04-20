@@ -10,7 +10,7 @@
 Gofloat is a library that does floating-point number calculations with fixed precision.
 
 ## Description
-### why goflat
+### why gofloat
 * without gofloat
 ```go
 package main

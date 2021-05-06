@@ -1,5 +1,7 @@
 # gofloat
 
+![gofloat_logo](./docs/images/logo.png)
+
 [![Godoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://pkg.go.dev/github.com/senpathi/gofloat)
 [![build](https://github.com/senpathi/gofloat/workflows/build/badge.svg)](https://github.com/senpathi/gofloat/actions)
 [![Coverage](https://codecov.io/gh/senpathi/gofloat/branch/master/graph/badge.svg)](https://codecov.io/gh/senpathi/gofloat)

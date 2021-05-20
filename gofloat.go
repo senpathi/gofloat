@@ -4,6 +4,7 @@ import (
 	"math"
 )
 
+// Float is to keep float's integer value, decimal value and its precision
 type Float struct {
 	integer   int64
 	decimal   int64

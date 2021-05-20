@@ -1,4 +1,4 @@
-// Gofloat is a library that does floating-point number calculations with fixed precision.
+// Package gofloat is a library that does floating-point number calculations with fixed precision.
 //
 // Below examples show why Gofloat library is useful when doing floating-point calculations.
 //
@@ -79,7 +79,7 @@
 // Please see the example programs in the examples directory for reference.
 //
 //
-// Limitations.
+// Limitations
 //
 // If the calculated result is larger than maximum float64 value, result will be incorrect.
 package gofloat

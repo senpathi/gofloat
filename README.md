@@ -93,7 +93,7 @@ func main() {
 	fmt.Println(f.Float64()) //Output: 2.222
 }
 ````
-Please see the example programs in the examples directory for reference.
+Please see the example programs in the [examples](https://github.com/senpathi/gofloat/tree/master/examples) directory for reference.
 
 ## Limitations
 * if the calculated result is larger than maximum float64 value, result will be incorrect.

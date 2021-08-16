@@ -2,6 +2,7 @@ package gofloat
 
 import (
 	"math"
+	"strconv"
 )
 
 // Float is to keep float's integer value, decimal value and its precision
@@ -61,6 +62,10 @@ func (f Float) Divide(x Float) Float {
 func (f Float) Float64() float64 {
 	floatingLength := int64(math.Trunc(math.Pow(10, float64(f.precision))))
 	return (float64(f.integer*floatingLength) + float64(f.decimal)) / float64(floatingLength)
+}
+
+func (f Float) String() string {
+	return strconv.FormatFloat(f.Float64(), 'f', f.precision, 64)
 }
 
 func getMaxPrecision(p1, p2 int) (max int) {

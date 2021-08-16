@@ -80,6 +80,25 @@ func TestFloat(t *testing.T) {
 		}
 	})
 
+	t.Run(`TestFloatString`, func(t *testing.T) {
+		type stringTest struct {
+			input     float64
+			precision int
+			output    string
+		}
+
+		testTable := []stringTest{
+			{1.234567, 6, `1.234567`},
+			{-1.234567, 6, `-1.234567`},
+		}
+		for _, tt := range testTable {
+			x := ToFloat(tt.input, tt.precision)
+			if x.String() != tt.output {
+				t.Error(fmt.Sprintf(`expected %s, received %s`, tt.output, x.String()))
+			}
+		}
+	})
+
 }
 
 func BenchmarkFloat(b *testing.B) {

@@ -2,8 +2,9 @@ package gofloat_test
 
 import (
 	"fmt"
-	"github.com/senpathi/gofloat"
 	"math"
+
+	"github.com/senpathi/gofloat"
 )
 
 func ExampleToFloat() {

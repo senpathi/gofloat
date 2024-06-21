@@ -16,7 +16,7 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-          go-version: [ 1.13.x, 1.14.x ]
+          go-version: [ 1.21.x, 1.22.x ]
           operating-system: [ ubuntu-latest, windows-latest, macos-latest ]
     env:
       GO111MODULE: on

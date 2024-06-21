@@ -1,3 +1,3 @@
 module github.com/senpathi/gofloat
 
-go 1.13
+go 1.22.4

@@ -148,11 +148,14 @@ func setupTestTable(operator string) []TestInput {
 			precision2: rand.Intn(9),
 		}
 
-		length1 := math.Trunc(math.Pow(10, float64(inputs[i].precision1)))
-		max := getMaxPrecision(inputs[i].precision1, inputs[i].precision2)
-		lengthMax := math.Trunc(math.Pow(10, float64(max)))
-		rounded1 := ToFloat(inputs[i].input1, inputs[i].precision1).Float64()
-		rounded2 := ToFloat(inputs[i].input2, inputs[i].precision2).Float64()
+		length1 := math.Trunc(math.Pow10(inputs[i].precision1))
+
+		f1 := ToFloat(inputs[i].input1, inputs[i].precision1)
+		rounded1 := f1.Float64()
+		f2 := ToFloat(inputs[i].input2, inputs[i].precision2)
+		rounded2 := f2.Float64()
+		_, maxFact := getMaxPrecision(f1, f2)
+		lengthMax := float64(maxFact)
 
 		switch operator {
 		case `NONE`:
